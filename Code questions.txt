@@ -1,0 +1,8 @@
+RELATIVE TO JB PROJECT
+- What is the __str__ method? What is __ more generally?
+- Do you like putting an underscore for class variables?
+- What is a pickle?
+- I don't understand how this works:
+with open(databaseName + ".pkl", "wb") as db:
+    pickle.dump(number_db,db)
+- On est d'accord qu'il code comme un cochon ?
