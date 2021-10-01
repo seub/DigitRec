@@ -10,8 +10,10 @@ class ImageClassifier:
         self._databaseName = databaseName
 
     def __str__(self):
-        if not self._database: # Never test object == None
+        if self._database: # Never test object == None
             return ("ImageRegognizer with database of" + str(len(self._database)) + " different Classes, each containing " + str(len(self._database[0])) + " images.")
+        else:
+            return "Empty database!"
         
     @staticmethod
     def createDatabase(imageFolder, databaseName):
