@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 import pickle
+from collections import defaultdict
 
 
 class ImageClassifier:
@@ -9,18 +10,16 @@ class ImageClassifier:
         self._databaseName = databaseName
 
     def __str__(self):
-        if not self._database == None:
+        if not self._database: # Never test object == None
             return ("ImageRegognizer with database of" + str(len(self._database)) + " different Classes, each containing " + str(len(self._database[0])) + " images.")
         
     @staticmethod
     def createDatabase(imageFolder, databaseName):
-        number_db = {}
-        for i in range(10):
-            number_db[i] = []
-        for number in range(len(number_db.keys())):
-            for index in range(16):                         # Change 16 to the number of images you have per category
-                image = Image.open(imageFolder + "/" + str(number) + "_" + str(index) + ".jpg")
-                number_db[number].append(np.array(image).tolist())
+        number_db = defaultdict(list)
+        for digit in range(10):
+            for index in range(16): # Change 16 to the number of images you have per category
+                image = Image.open(imageFolder + "/" + str(digit) + "_" + str(index) + ".jpg")
+                number_db[digit].append(np.array(image).tolist())
 
         with open(databaseName + ".pkl", "wb") as db:
             pickle.dump(number_db,db)
