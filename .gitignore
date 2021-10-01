@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Added by hand (Brice)
+python-course.eu/www.python-course.eu/
