@@ -10,10 +10,8 @@ class ImageClassifier:
         self._databaseName = databaseName
 
     def __str__(self):
-        if self._database: # Never test object == None
+        if not self._database: # Never test object == None
             return ("ImageRegognizer with database of" + str(len(self._database)) + " different Classes, each containing " + str(len(self._database[0])) + " images.")
-        else:
-            return "Empty database!"
         
     @staticmethod
     def createDatabase(imageFolder, databaseName):
@@ -22,7 +20,6 @@ class ImageClassifier:
             for index in range(16): # Change 16 to the number of images you have per category
                 image = Image.open(imageFolder + "/" + str(digit) + "_" + str(index) + ".jpg")
                 number_db[digit].append(np.array(image).tolist())
-
         with open(databaseName + ".pkl", "wb") as db:
             pickle.dump(number_db,db)
         
@@ -70,7 +67,6 @@ class ImageClassifier:
         for key, value in confidence_dict.items():
             if value == max_confidence[0]:
                 return key, min(round(((1.0/max_confidence[0])*max_confidence[1])*100,2), 100.00)
-
 
 if __name__ == "__main__":
     ImageClassifier.createDatabase("images", "number_db")
